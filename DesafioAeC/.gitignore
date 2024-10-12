@@ -1,0 +1,44 @@
+# Visual Studio e .NET
+.vscode/
+bin/
+obj/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Diretórios de compilação
+bin/
+obj/
+out/
+
+# Pacotes do NuGet
+*.nupkg
+# Pacotes NuGet restaurados
+**/packages/*
+# Pacotes instalados com dotnet restore
+/Packages/
+
+# Arquivos de logs
+*.log
+
+# Configurações locais do usuário
+*.local.settings.json
+appsettings.Development.json
+
+# Arquivos de build e configuração locais
+project.lock.json
+project.fragment.lock.json
+project.nuget.cache
+*.csproj.user
+*.builds
+
+# Testes de cobertura de código
+TestResults/
+*.coverage
+*.coveragexml
+
+# Outros arquivos
+*.swp
+*.bak
+*.tmp
