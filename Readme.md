@@ -13,7 +13,45 @@ O projeto segue a arquitetura **Domain-Driven Design (DDD)**, organizado nas seg
 ### Estrutura de Pastas:
 
 ```
-/DesafioAeC │ ├── /Domain │ ├── /Entities │ │ └── Course.cs │ ├── /Interfaces │ │ ├── IRepository.cs │ │ └── IScraperService.cs │ └── /ValueObjects │ └── SearchTerm.cs │ ├── /Application │ ├── /Services │ │ └── CourseScraperService.cs │ └── /DTOs │ └── CourseDTO.cs │ ├── /Infrastructure │ ├── /Repositories │ │ └── MongoRepository.cs │ ├── /Persistence │ │ └── MongoContext.cs │ └── /Scraping │ └── SeleniumScraper.cs │ ├── /UI │ └── Program.cs │ ├── /Tests │ ├── CourseScraperServiceTests.cs │ └── MongoRepositoryTests.cs │ ├── /Shared │ └── DependencyInjection.cs │ ├── appsettings.json ├── README.md └── DesafioAeC.sln
+/DesafioAeC
+│
+├── /Domain
+│   ├── /Entities
+│   │   └── Course.cs
+│   ├── /Interfaces
+│   │   ├── IRepository.cs
+│   │   └── IScraperService.cs
+│   └── /ValueObjects
+│       └── SearchTerm.cs
+│
+├── /Application
+│   ├── /Services
+│   │   └── CourseScraperService.cs
+│   └── /DTOs
+│       └── CourseDTO.cs
+│
+├── /Infrastructure
+│   ├── /Repositories
+│   │   └── MongoRepository.cs
+│   ├── /Persistence
+│   │   └── MongoContext.cs
+│   └── /Scraping
+│       └── SeleniumScraper.cs
+│
+├── /UI
+│   └── Program.cs
+│
+├── /Tests
+│   ├── CourseScraperServiceTests.cs
+│   └── MongoRepositoryTests.cs
+│
+├── /Shared
+│   └── DependencyInjection.cs
+│
+├── appsettings.json
+├── README.md
+└── DesafioAeC.sln
+
 ```
 
 
