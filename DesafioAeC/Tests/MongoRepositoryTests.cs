@@ -28,7 +28,7 @@ namespace DesafioAeC.Tests
         public async Task AddAsync_ShouldInsertCourse()
         {
             // Arrange
-            var course = new Course("Curso 1", "Professor 1", "10h", "Descrição 1");
+            var course = new Course("Curso 1", "Professor 1", "10h", "Descriï¿½ï¿½o 1");
 
             // Act
             await _mongoRepository.AddAsync(course);
@@ -43,14 +43,14 @@ namespace DesafioAeC.Tests
             // Arrange
             var courses = new List<Course>
                 {
-                    new Course("Curso 1", "Professor 1", "10h", "Descrição 1")
+                    new Course("Curso 1", "Professor 1", "10h", "Descriï¿½ï¿½o 1")
                 };
 
             var cursorMock = new Mock<IAsyncCursor<Course>>();
             cursorMock.Setup(_ => _.Current).Returns(courses);
             cursorMock.SetupSequence(_ => _.MoveNext(It.IsAny<System.Threading.CancellationToken>())).Returns(true).Returns(false);
 
-            _mongoCollectionMock.Setup(c => c.FindAsync(It.IsAny<FilterDefinition<Course>>(), null, default, default)).ReturnsAsync(cursorMock.Object);
+            _mongoCollectionMock.Setup(c => c.FindAsync<Course>(It.IsAny<FilterDefinition<Course>>(), null, default)).ReturnsAsync(cursorMock.Object);
 
             // Act
             var result = await _mongoRepository.GetAllAsync();

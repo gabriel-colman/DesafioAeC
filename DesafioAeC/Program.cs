@@ -13,15 +13,21 @@ namespace DesafioAeC
         {
             var host = CreateHostBuilder(args).Build();
 
-            // Obtenção do serviço de scraping via injeção de dependências
+            // ObtenÃ§Ã£o do serviÃ§o de scraping via injeÃ§Ã£o de dependÃªncias
             var scraperService = host.Services.GetRequiredService<CourseScraperService>();
 
             Console.WriteLine("Digite o termo de busca para o scraping:");
             var searchTerm = Console.ReadLine();
 
+            if (string.IsNullOrEmpty(searchTerm))
+            {
+                Console.WriteLine("O termo de busca nÃ£o pode ser vazio.");
+                return;
+            }
+
             // Executa o scraping e salva os cursos no MongoDB
             await scraperService.ScrapeAndSaveAsync(searchTerm);
-            Console.WriteLine("Scraping concluído e cursos salvos com sucesso!");
+            Console.WriteLine("Scraping concluÃ­do e cursos salvos com sucesso!");
 
             // Exibe os cursos salvos
             var courses = await scraperService.GetAllCoursesAsync();
@@ -31,12 +37,12 @@ namespace DesafioAeC
             }
         }
 
-        // Configuração do HostBuilder para injeção de dependências
+        // ConfiguraÃ§Ã£o do HostBuilder para injeÃ§Ã£o de dependÃªncias
         public static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
                 .ConfigureServices((context, services) =>
                 {
-                    services.AddApplicationServices(); // Chama o método de extensão que registra os serviços
+                    services.AddApplicationServices(); // Chama o mÃ©todo de extensÃ£o que registra os serviÃ§os
                 });
     }
 }
