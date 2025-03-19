@@ -14,17 +14,27 @@ namespace DesafioAeC.Infrastructure.Scraping
         // Construtor que inicializa o Selenium WebDriver
         public SeleniumScraper()
         {
-            // Inicializa o ChromeDriver, certifique-se de que o caminho para o driver est· correto
-            _driver = new ChromeDriver();
+            // Inicializa corretamente a vari√°vel _driver
+            ChromeOptions options = new ChromeOptions();
+            options.AddArgument("--headless"); // Roda sem interface gr√°fica
+            options.AddArgument("--no-sandbox");
+            options.AddArgument("--disable-dev-shm-usage");
+
+            _driver = new ChromeDriver(options); // Atribui √† vari√°vel de inst√¢ncia
         }
 
-        // MÈtodo para realizar o scraping no site da Alura
+        // M√©todo para realizar o scraping no site da Alura
         public async Task<List<Course>> ScrapeCoursesAsync(string searchTerm)
         {
-            // A lista de cursos que ser· retornada
             var courses = new List<Course>();
 
-            // Navega atÈ o site da Alura
+            // Verifica se o driver est√° inicializado corretamente antes de us√°-lo
+            if (_driver == null)
+            {
+                throw new System.Exception("Erro: ChromeDriver n√£o foi inicializado corretamente.");
+            }
+
+            // Navega at√© o site da Alura
             _driver.Navigate().GoToUrl("https://www.alura.com.br/");
 
             // Localiza o campo de busca e insere o termo de pesquisa
@@ -32,11 +42,11 @@ namespace DesafioAeC.Infrastructure.Scraping
             searchBox.SendKeys(searchTerm);
             searchBox.Submit();
 
-            // Aguarda carregar os resultados (pode ajustar esse tempo de acordo com a performance)
-            await Task.Delay(2000); // tempo de espera para carregar os resultados
+            // Aguarda carregar os resultados
+            await Task.Delay(2000);
 
-            // Faz o scraping dos cursos exibidos (exemplo genÈrico, ajustar de acordo com o HTML do site)
-            var courseElements = _driver.FindElements(By.CssSelector(".curso")); // ajuste o seletor conforme o HTML real
+            // Faz o scraping dos cursos exibidos
+            var courseElements = _driver.FindElements(By.CssSelector(".curso"));
 
             foreach (var courseElement in courseElements)
             {
@@ -52,11 +62,11 @@ namespace DesafioAeC.Infrastructure.Scraping
             return courses;
         }
 
-        // MÈtodo para liberar os recursos do WebDriver
+        // M√©todo para liberar os recursos do WebDriver
         public void Dispose()
         {
-            _driver.Quit();
-            _driver.Dispose();
+            _driver?.Quit();
+            _driver?.Dispose();
         }
     }
 }
